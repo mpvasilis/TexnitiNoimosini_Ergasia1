@@ -8,6 +8,10 @@ class Node implements Comparator<Node> {
     private Node parent;
     private int left, right, top, bottom;
     private int cost;
+    private double hCost;                   // heuristic cost
+    private double fCost;                   // f(n) cost = g(n) + h(n)
+    private State st;
+
 
 
     public Node() {
@@ -129,5 +133,18 @@ class Node implements Comparator<Node> {
             return this.node == node.node;
         }
         return false;
+    }
+
+
+    public double getHCost() {
+        return hCost;
+    }
+
+    public double getFCost() {
+        return fCost;
+    }
+
+    public State getCurState() {
+        return st;
     }
 }
