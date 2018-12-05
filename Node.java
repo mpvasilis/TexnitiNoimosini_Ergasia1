@@ -2,6 +2,7 @@ import java.util.Comparator;
 
 class Node implements Comparator<Node> {
 
+    public String name;
     private static int depth;
     public int node;
     private int state;
@@ -20,7 +21,9 @@ class Node implements Comparator<Node> {
     }
 
 
-    public Node(int s) {
+    public Node(int s, String n) {
+
+        name = n;
 
         state = s;
         parent = null;
@@ -32,6 +35,15 @@ class Node implements Comparator<Node> {
         cost = 0;
         depth++;
     }
+
+    public String getValue() {
+        return name;
+    }
+
+    public String toString() {
+        return name;
+    }
+
 
     public int getState() {
         return state;
@@ -102,7 +114,9 @@ class Node implements Comparator<Node> {
     public int getCost() {
         return cost;
     }
+    ;
 
+    public void setCost(int cost) { this.cost = cost; }
     ;
 
     public int getDepth() {

@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -22,12 +23,10 @@ public class Grid {
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                nodes[i][j] = new Node(state++);
+                String nodeName = "("+Integer.toString(i)+","+Integer.toString(j)+")";
+                nodes[i][j] = new Node(state++, nodeName);
 
                 setNodeNeighbours(i, j);
-                //System.out.println("("+grid[i][j].getStateX()+","+grid[i][j].getStateY()+")");
-                //System.out.println("Depth: "+grid[i][j].getDepth());
-                System.out.println(nodes[i][j].getLeft() + " " + nodes[i][j].getRight() + " " + nodes[i][j].getTop() + " " + nodes[i][j].getBottom());
             }
         }
 
@@ -82,9 +81,6 @@ public class Grid {
     public void setNodeNeighbours(int i, int j) {
         if (j != 0) {
 
-            //o prwtos komvos kathe seiras dn exei patera
-            //oi ipoloipoi einai paidia tou proigoumenou komvou
-            nodes[i][j].setParent(nodes[i][j - 1]);
             //to aristero melos tou komvou einai idio me to deksi tou patera tou
             nodes[i][j].setLeft(nodes[i][j - 1].getRight());
             if (i != n - 1)
@@ -178,13 +174,31 @@ public class Grid {
 
     public void IDS() {
 
-        IDS ids = new IDS();
+        System.out.println("\n\n--------- IDS ---------");
+        Node start = getRandomNode();
+        Node goal = getRandomNode();
 
+        IDS ids = new IDS(nodes, n);
+        Node finish = ids.iterativeDeepeningSearch(start, goal);
+        List<Node> path = ids.printPath(finish);
+        System.out.println("Start: "+start.getValue()+"\nGoal: "+goal.getValue());
+        System.out.println("Path: "+path);
+        System.out.println("-----------------------");
     }
 
     public void ASTAR() {
         ASTAR astar = new ASTAR();
 
+    }
+
+    public Node getRandomNode() {
+
+        Random rand = new Random();
+
+        int rand_i = rand.nextInt(n);
+        int rand_j = rand.nextInt(n);
+
+        return nodes[rand_i][rand_j];
     }
 
 
