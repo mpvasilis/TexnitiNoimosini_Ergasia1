@@ -35,7 +35,7 @@ public class Grid {
                 fillAdjMatrix(i, j);
         }
 
-        printAdjMatrix();
+        //printAdjMatrix();
     }
 
     void printAdjMatrix() {
@@ -145,24 +145,51 @@ public class Grid {
                 rand_j = rand.nextInt(n * n);
             } while (adjMatrix[rand_i][rand_j] != 1);
 
+            System.out.println("====DELETED EDGES====");
+            System.out.println("-----------------\nNode1: "+rand_i+"\nNode2: "+rand_j);
+            System.out.println("Node1["+(rand_i/n)+"]["+(rand_i%n)+"]\nNode2["+(rand_j / n)+"]["+(rand_j%n)+"]");
+            System.out.println("=====================");
+
+            if(Math.abs(rand_j - rand_i) == 1) {
+                if(rand_i > rand_j) {
+                    nodes[(rand_i / n)][(rand_i % n)].setLeft(0);
+                    nodes[(rand_j / n)][(rand_j % n)].setRight(0);
+                } else {
+                    nodes[(rand_i / n)][(rand_i % n)].setRight(0);
+                    nodes[(rand_j / n)][(rand_j % n)].setLeft(0);
+                }
+            } else {
+                if(rand_i > rand_j) {
+                    nodes[(rand_i / n)][(rand_i % n)].setTop(0);
+                    nodes[(rand_j / n)][(rand_j % n)].setBottom(0);
+                } else {
+                    nodes[(rand_i / n)][(rand_i % n)].setBottom(0);
+                    nodes[(rand_j / n)][(rand_j % n)].setTop(0);
+                }
+            }
+
             removeEdge(rand_i, rand_j);
         }
 
-        printAdjMatrix();
+        //printAdjMatrix();
     }
 
     public void valueEdges() {
 
+        int value;
 
-        for (int i = 0; i < n * n; i++) {
-            for (int j = 0; j < n * n; j++)
+        for (int i = 0; i < n*n; i++) {
+            for (int j = 0; j < n*n; j++)
                 if (adjMatrix[i][j] == 1) {
-                    adjMatrix[i][j] = (int) (Math.random() * 40 + 10);
+                    //value = (int) (Math.random() * 40 + 10);
+                    value = (int) (Math.random() * 5 + 1);
+                    adjMatrix[i][j] = value;
+                    adjMatrix[j][i] = value;
                     ;
                 }
         }
 
-        printAdjMatrix();
+        //printAdjMatrix();
     }
 
     public void UCS() {
@@ -183,12 +210,23 @@ public class Grid {
         List<Node> path = ids.printPath(finish);
         System.out.println("Start: "+start.getValue()+"\nGoal: "+goal.getValue());
         System.out.println("Path: "+path);
+        System.out.println("Nodes created: "+ids.getNodesCreated());
         System.out.println("-----------------------");
     }
 
     public void ASTAR() {
-        ASTAR astar = new ASTAR();
 
+        System.out.println("\n\n--------- A* ---------");
+        Node start = getRandomNode();
+        Node goal = getRandomNode();
+
+        ASTAR astar = new ASTAR(nodes, n);
+        astar.aStarSearch(start, goal);
+        List<Node> path = astar.printPath(goal);
+
+        System.out.println("Start: "+start.getValue()+"\nGoal: "+goal.getValue());
+        System.out.println("Path: "+path);
+        System.out.println("-----------------------");
     }
 
     public Node getRandomNode() {

@@ -6,10 +6,15 @@ public class main {
         Grid gridTest = new Grid();
 
         gridTest.createGrid();
-        //gridTest.deleteEdges();
+
+
+        gridTest.deleteEdges();
+        gridTest.IDS();
+
+
         gridTest.valueEdges();
         gridTest.UCS();
-        gridTest.IDS();
+
         gridTest.ASTAR();
 
 
