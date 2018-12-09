@@ -9,7 +9,7 @@ class Node implements Comparator<Node> {
     private Node parent;
     private int left, right, top, bottom;
     private int cost;
-
+    private int fVal; //f = g + h
 
     public Node() {
 
@@ -34,6 +34,15 @@ class Node implements Comparator<Node> {
 
         cost = 0;
         depth++;
+    }
+
+
+    public int getfVal() {
+        return fVal;
+    }
+
+    public void setfVal(int fVal) {
+        this.fVal = fVal;
     }
 
     public String getValue() {
