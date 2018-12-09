@@ -8,7 +8,7 @@ public class main {
         gridTest.createGrid();
 
 
-        gridTest.deleteEdges();
+        //gridTest.deleteEdges();
         gridTest.IDS();
 
 

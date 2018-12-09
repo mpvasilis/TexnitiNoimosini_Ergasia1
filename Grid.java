@@ -193,9 +193,13 @@ public class Grid {
     }
 
     public void UCS() {
+        System.out.println("\n\n--------- UCS ---------");
+
         UCS ucs = new UCS(n);
         ucs.uniformCostSearch(getAdjMatrix(), (int) (Math.random() * (n - 1) + 1), (int) (Math.random() * (n - 1) + 1));
         ucs.printPath();
+        System.out.println("\n-----------------------");
+
 
     }
 

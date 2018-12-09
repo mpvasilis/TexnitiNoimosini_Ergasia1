@@ -42,7 +42,7 @@ public class UCS
 
         while (!priorityQueue.isEmpty()) {
             evaluationNode = getNodeWithMinDistanceFromPriorityQueue();
-            System.out.println("The eval Node is " + evaluationNode);
+            System.out.println("Checking node: " + evaluationNode);
             if (evaluationNode == destination) {
                 return distances[destination];
             }
@@ -89,7 +89,7 @@ public class UCS
             vertex = parent[vertex];
         }
 
-        System.out.println("The Path between " + source + " and " + destination + " is ");
+        System.out.println("The path between " + source + " and " + destination + " is:");
         Iterator<Integer> iterator = path.descendingIterator();
         while (iterator.hasNext()) {
             System.out.print(iterator.next() + "\t");
