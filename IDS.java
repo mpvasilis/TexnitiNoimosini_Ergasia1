@@ -8,7 +8,8 @@ public class IDS {
     private int nodesCreated;
     private static int counter = 0;
     public final int MAX_NODS_CREATED=100;
-    public int circle_counter;
+    public final int EXECUTION_TIME_MILLIS = 5000; // μέγιστος χρόνος εκτέλεσης του αλγορίθμου
+
     public Set<Node> explored = new HashSet<Node>();
 
     public IDS(Node[][] grid, int numberOfNodes) {
@@ -24,17 +25,16 @@ public class IDS {
     public int getNodesCreated() {
         return nodesCreated;
     }
-    
+
     public Node iterativeDeepeningSearch(Node root, Node goal) {
+
+        long startTime = System.currentTimeMillis();
+
         // loops through until a goal node is found
         for (int depth = 0; depth < Integer.MAX_VALUE; depth++) {
             Node found = DLS(root, depth, goal);
             if(explored.contains(root)) {
-                circle_counter++;
-                if(circle_counter>10) {
-                    System.out.println("No path leading to goal, circles.");
-                    return null;
-                }
+
             }
             if (found != null) {
                 if(getNeighbhours(found).isEmpty()) {
@@ -44,9 +44,14 @@ public class IDS {
 
                 return found;
             }
+            long timenow = System.currentTimeMillis();
+            long elapsedTime = timenow - startTime;
+            if (elapsedTime > EXECUTION_TIME_MILLIS) {
+                System.out.println("No path leading to goal, execution time limit reached.");
+                return null;
+            }
         }
-        // this will never be reached as it
-        // loops forever until goal is found
+
         return null;
     }
 
