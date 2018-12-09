@@ -194,12 +194,10 @@ public class Grid {
 
     public void UCS() {
         System.out.println("\n\n--------- UCS ---------");
-
         UCS ucs = new UCS(n);
         ucs.uniformCostSearch(getAdjMatrix(), (int) (Math.random() * (n - 1) + 1), (int) (Math.random() * (n - 1) + 1));
         ucs.printPath();
         System.out.println("\n-----------------------");
-
 
     }
 
@@ -234,12 +232,9 @@ public class Grid {
     }
 
     public Node getRandomNode() {
-
         Random rand = new Random();
-
         int rand_i = rand.nextInt(n);
         int rand_j = rand.nextInt(n);
-
         return nodes[rand_i][rand_j];
     }
 
