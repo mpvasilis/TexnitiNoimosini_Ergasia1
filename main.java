@@ -18,8 +18,8 @@ public class main {
         gridTest.deleteEdges();
         gridTest.valueEdges();
         gridTest.UCS();
-        gridTest.ASTAR();
         gridTest.IDS();
+        gridTest.ASTAR();
 
     }
 }

@@ -4,11 +4,15 @@ public class ASTAR {
 
     private int numberOfNodes; //n
     private Node[][] nodes;
+    private int adjMatrix[][];
+    private int nodesCreated;
+    private static int counter = 0;
 
-    public ASTAR(Node[][] grid, int numberOfNodes) {
+    public ASTAR(Node[][] grid, int numberOfNodes, int adjMatrix[][]) {
 
         this.numberOfNodes=numberOfNodes;
         this.nodes=grid;
+        this.adjMatrix=adjMatrix;
     }
 
     public void aStarSearch(Node source, Node goal) {
@@ -44,7 +48,7 @@ public class ASTAR {
                 Node current = queue.poll();
 
                 explored.add(current);
-
+                setNodesCreated(++counter);
                 //goal found
                 if (current.getState() == goal.getState()) {
                     found = true;
@@ -54,7 +58,7 @@ public class ASTAR {
                 for (Node n : getNeighbhours(current)) {
 
                     Node child = n;
-                    int cost = n.getCost();
+                    int cost = adjMatrix[current.getState()][child.getState()];
                     int temp_g_scores = current.getCost() + cost;
                     int temp_f_scores = temp_g_scores + heuristicManh(child, goal);
 
@@ -175,6 +179,14 @@ public class ASTAR {
         manhDist = counterI + counterJ;
 
         return manhDist;
+    }
+
+    public void setNodesCreated(int nodesCreated) {
+        this.nodesCreated = nodesCreated;
+    }
+
+    public int getNodesCreated() {
+        return nodesCreated;
     }
 
     public static List<Node> printPath(Node target){
